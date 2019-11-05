@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.szwx.sell.dao.system.user.MemberDao">
+    <insert id="insert" parameterType="cn.net.szwx.sell.entity.system.user.Member"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into member (creator_id, create_time, editor_id, edit_time, status, flag,
+        username, fullname, nickname, password, lock_state, grade, weixin_id, id_card_no, one_inviter, two_inviter,
+        three_inviter, one_bonus, two_bonus, three_bonus, total_bonus)
+        values (#{creatorId}, #{createTime}, #{editorId}, #{editTime}, #{status}, #{flag},
+        #{username}, #{fullname}, #{nickname}, #{password}, #{lockState}, #{grade}, #{weixinId}, #{idCardNo}, #{oneInviter},
+        #{twoInviter}, #{threeInviter}, #{oneBonus}, #{twoBonus}, #{threeBonus}, #{totalBonus})
+    </insert>
+
+    <update id="update" parameterType="cn.net.szwx.sell.entity.system.user.Member">
+        update member set editor_id = #{editorId}, edit_time = #{editTime},
+        username = #{username}, fullname = #{fullname}, nickname = #{nickname}, password = #{password}, lock_state = #{lockState},
+        grade = #{grade}, weixin_id = #{weixinId}, id_card_no = #{idCardNo}, one_inviter = #{oneInviter}, two_inviter = #{twoInviter},
+        three_inviter = #{threeInviter}, one_bonus = #{oneBonus}, two_bonus = #{twoBonus}, three_bonus = #{threeBonus}, total_bonus = #{totalBonus}
+        where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update member set status = false, flag = false where id = #{id}
+    </update>
+
+    <sql id="columns">
+        id, username, fullname, nickname, password, lock_state, grade, weixin_id, id_card_no, one_inviter, two_inviter,
+        three_inviter, one_bonus, two_bonus, three_bonus, total_bonus
+    </sql>
+
+    <select id="list" resultType="cn.net.szwx.sell.entity.system.user.Member"
+            parameterType="cn.net.szwx.sell.entity.system.user.MemberSO">
+        select <include refid="columns"/>
+        from member
+        where status = true and flag = true
+        <if test="null != username and '' != username"> and username = #{username} </if>
+        <if test="null != password and '' != password"> and password = #{password} </if>
+        <if test="null != lockState"> and lock_state = #{lockState} </if>
+        <if test="null != oneInviter"> and one_inviter = #{oneInviter} </if>
+        <if test="null != twoInviter"> and two_inviter = #{twoInviter} </if>
+        <if test="null != threeInviter"> and three_inviter = #{threeInviter} </if>
+        <if test="null != fullname and '' != fullname">
+            <bind name="fullnameLike" value="'%' + fullname + '%'" />
+            and fullname like #{fullnameLike}
+        </if>
+        <if test="null != nickname and '' != nickname">
+            <bind name="nicknameLike" value="'%' + nickname + '%'" />
+            and nickname like #{nicknameLike}
+        </if>
+        <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+    </select>
+
+    <select id="getById" resultType="cn.net.szwx.sell.entity.system.user.Member">
+        select <include refid="columns"/>
+        from member where status = true and flag = true and id = #{id}
+    </select>
+</mapper>

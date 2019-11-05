@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>会员添加编辑</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta content="webkit" name="renderer"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta content="no-cache" http-equiv="Pragma"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/style/admin.css}" media="all"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/layui/css/modules/layer/default/layer.css}" media="all"/>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">会员添加编辑</div>
+        <div class="layui-card-body">
+            <form th:object="${so}" class="layui-form" method="post" lay-filter="component-form-element">
+
+            </form>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript" th:src="@{/static/layuiadmin/layui/layui.js}"></script>
+</body>
+</html>
