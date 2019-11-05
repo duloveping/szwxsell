@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.szwx.sell.dao.system.user.EmployeeDao">
+    <insert id="insert" parameterType="cn.net.szwx.sell.entity.system.user.Employee"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into employee (creator_id, create_time, editor_id, edit_time, status, flag,
+        username, fullname, nickname, password, lock_state)
+        values (#{creatorId}, #{createTime}, #{editorId}, #{editTime}, #{status}, #{flag},
+        #{username}, #{fullname}, #{nickname}, #{password}, #{lockState})
+    </insert>
+
+    <update id="update" parameterType="cn.net.szwx.sell.entity.system.user.Employee">
+        update employee set editor_id = #{editorId}, edit_time = #{editTime},
+        username = #{username}, fullname = #{fullname}, nickname = #{nickname}, password = #{password}, lock_state = #{lockState},
+        where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update employee set status = false, flag = false where id = #{id}
+    </update>
+
+    <sql id="columns">
+        id, username, fullname, nickname, password, lock_state
+    </sql>
+
+    <select id="list" resultType="cn.net.szwx.sell.entity.system.user.Employee"
+            parameterType="cn.net.szwx.sell.entity.system.user.EmployeeSO">
+        select <include refid="columns"/>
+        from employee
+        where status = true and flag = true
+        <if test="null != username and '' != username"> and username = #{username} </if>
+        <if test="null != password and '' != password"> and password = #{password} </if>
+        <if test="null != lockState"> and lock_state = #{lockState} </if>
+        <if test="null != fullname and '' != fullname">
+            <bind name="fullnameLike" value="'%' + fullname + '%'" />
+            and fullname like #{fullnameLike}
+        </if>
+        <if test="null != nickname and '' != nickname">
+            <bind name="nicknameLike" value="'%' + nickname + '%'" />
+            and nickname like #{nicknameLike}
+        </if>
+        <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+    </select>
+
+    <select id="getById" resultType="cn.net.szwx.sell.entity.system.user.Employee">
+        select <include refid="columns"/>
+        from employee where status = true and flag = true and id = #{id}
+    </select>
+</mapper>
