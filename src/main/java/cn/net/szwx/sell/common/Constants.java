@@ -12,4 +12,7 @@ public class Constants {
     public static final Integer YES = 2;
     public static final Integer NO = 3;
 
+    public static final Integer ACCOUNT_LOCK_STATE_ENABLED = 1;
+    public static final Integer ACCOUNT_LOCK_STATE_DISABLED = 2;
+
 }

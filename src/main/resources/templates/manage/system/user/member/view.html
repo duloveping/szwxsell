@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>会员添加编辑</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>会员详情</title>
     <meta charset="utf-8"/>
     <meta content="webkit" name="renderer"/>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
@@ -18,25 +17,25 @@
 <div class="layui-fluid">
     <form th:object="${so}" class="layui-form" method="post" lay-filter="component-form-element">
         <div class="layui-card">
-            <div class="layui-card-header">会员添加编辑</div>
+            <div class="layui-card-header">会员详情</div>
             <div class="layui-card-body">
                 <div class="layui-row layui-form-item">
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label"><span style="color:red;">*</span>会员姓名：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="fullname" th:value="${so.fullname}" lay-verify="required" placeholder="请输入会员姓名" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="fullname" th:value="${so.fullname}" lay-verify="required" placeholder="请输入会员姓名" autocomplete="off" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label"><span style="color:red;">*</span>会员账号：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="username" th:value="${so.username}" lay-verify="required" placeholder="请输入会员账号" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="username" th:value="${so.username}" lay-verify="required" placeholder="请输入会员账号" autocomplete="off" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label"><span style="color:red;">*</span>会员昵称：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="nickname" th:value="${so.nickname}" lay-verify="required" placeholder="请输入会员昵称" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="nickname" th:value="${so.nickname}" lay-verify="required" placeholder="请输入会员昵称" autocomplete="off" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -44,20 +43,20 @@
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">登录密码：</label>
                         <div class="layui-input-block">
-                            <input type="password" name="password" value="" placeholder="请输入会员的登录密码" autocomplete="off" class="layui-input">
+                            <input type="password" name="password" value="" placeholder="请输入会员的登录密码" autocomplete="off" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label"><span style="color:red;">*</span>锁定状态：</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="lockState" value="1" title="解锁" th:checked="${so.lockState eq 1}">
-                            <input type="radio" name="lockState" value="2" title="锁定" th:checked="${so.lockState eq 2}">
+                            <input type="radio" name="lockState" value="1" title="解锁" th:checked="${so.lockState eq 1}" disabled="disabled">
+                            <input type="radio" name="lockState" value="2" title="锁定" th:checked="${so.lockState eq 2}" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">会员等级：</label>
                         <div class="layui-input-block">
-                            <select name="grade">
+                            <select name="grade" disabled="disabled">
                                 <option value="0">请选择</option>
                                 <option value="1" th:selected="${so.grade eq 1}">一级会员</option>
                                 <option value="2" th:selected="${so.grade eq 2}">二级会员</option>
@@ -77,13 +76,13 @@
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label"><span style="color:red;">*</span>身份证号码：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="idCardNo" th:value="${so.idCardNo}" lay-verify="required" placeholder="请输入身份证号码" autocomplete="off" class="layui-input" maxlength="18">
+                            <input type="text" name="idCardNo" th:value="${so.idCardNo}" lay-verify="required" placeholder="请输入身份证号码" autocomplete="off" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">总奖金：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="totalBonus" th:value="${so.totalBonus}" class="layui-input" readonly="readonly">
+                            <input type="text" name="totalBonus" th:value="${so.totalBonus}" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -91,14 +90,14 @@
                     <div class="layui-col-xs6">
                         <label class="layui-form-label">一级推荐人：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="oneMember" th:value="${so.oneMember.fullname}" placeholder="请输入一级推荐人" class="layui-input" readonly="readonly">
+                            <input type="text" name="oneMember" th:value="${so.oneMember.fullname}" placeholder="请输入一级推荐人" class="layui-input" disabled="disabled">
                             <input type="hidden" name="oneInviter" th:value="${so.oneInviter}">
                         </div>
                     </div>
                     <div class="layui-col-xs6">
                         <label class="layui-form-label">一级资金：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="oneBonus" th:value="${so.oneBonus}" placeholder="请输入一级奖金" class="layui-input" readonly="readonly">
+                            <input type="text" name="oneBonus" th:value="${so.oneBonus}" placeholder="请输入一级奖金" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -106,14 +105,14 @@
                     <div class="layui-col-xs6">
                         <label class="layui-form-label">二级推荐人：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="twoMember" th:value="${so.twoMember.fullname}" placeholder="请输入二级推荐人" class="layui-input" readonly="readonly">
+                            <input type="text" name="twoMember" th:value="${so.twoMember.fullname}" placeholder="请输入二级推荐人" class="layui-input" disabled="disabled">
                             <input type="hidden" name="twoInviter" th:value="${so.twoInviter}">
                         </div>
                     </div>
                     <div class="layui-col-xs6">
                         <label class="layui-form-label">二级资金：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="twoBonus" th:value="${so.twoBonus}" placeholder="请输入二级奖金" class="layui-input" readonly="readonly">
+                            <input type="text" name="twoBonus" th:value="${so.twoBonus}" placeholder="请输入二级奖金" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -121,24 +120,15 @@
                     <div class="layui-col-xs6">
                         <label class="layui-form-label">三级推荐人：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="threeMember" th:value="${so.threeMember.fullname}" placeholder="请输入三级推荐人" class="layui-input" readonly="readonly">
+                            <input type="text" name="threeMember" th:value="${so.threeMember.fullname}" placeholder="请输入三级推荐人" class="layui-input" disabled="disabled">
                             <input type="hidden" name="threeInviter" th:value="${so.threeInviter}">
                         </div>
                     </div>
                     <div class="layui-col-xs6">
                         <label class="layui-form-label">三级资金：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="threeBonus" th:value="${so.threeBonus}" placeholder="请输入三级推荐人" class="layui-input" readonly="readonly">
+                            <input type="text" name="threeBonus" th:value="${so.threeBonus}" placeholder="请输入三级推荐人" class="layui-input" disabled="disabled">
                         </div>
-                    </div>
-                </div>
-                <div class="layui-row layui-form-item">
-                    <div class="layui-input-block">
-                        <input id="id" name="id" type="hidden" th:value="${so.id}">
-                        <input id="weixinId" name="weixinId" type="hidden" th:value="${so.weixinId}">
-                        <button id="saveButton" type="submit" class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>
-                        <button id="resetButton" type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        <button id="backButton" type="button" class="layui-btn layui-btn-normal">返回</button>
                     </div>
                 </div>
             </div>
@@ -148,6 +138,6 @@
 <script language="javascript" type="text/javascript" th:src="@{/static/layuiadmin/layui/layui.js}"></script>
 <script language="javascript" type="text/javascript" th:src="@{/static/templates/common/constants.js}"></script>
 <script language="javascript" type="text/javascript" th:src="@{/static/templates/common/common.js}"></script>
-<script language="javascript" type="text/javascript" th:src="@{/static/templates/manage/system/user/member/member-edit.js}"></script>
+<script language="javascript" type="text/javascript" th:src="@{/static/templates/manage/system/user/member/member-view.js}"></script>
 </body>
 </html>
