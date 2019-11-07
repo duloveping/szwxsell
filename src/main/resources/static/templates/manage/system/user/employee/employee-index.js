@@ -14,7 +14,7 @@ layui.config({
             return {code: res.status, msg: res.info, count: res.total, data: res.datas};
         },
         page: true,
-        method: 'post',
+        method: 'post',/manage/system/user/employee/list
         height: 'full-240',
         cellMinWidth: 80,
         limit: 30,

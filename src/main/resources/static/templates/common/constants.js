@@ -1,9 +1,6 @@
 const RESULT_STATUS_SUCCESS = 0;
 const RESULT_STATUS_FAILURE = 1;
 
-const ACCOUNT_LOCK_STATE_ENABLED = 1;
-const ACCOUNT_LOCK_STATE_DISABLED = 2;
-
 /** 会员锁定状态 - 启动 */
 const ACCOUNT_LOCK_STATE_ENABLED = 1;
 /** 会员锁定状态 - 禁用 */

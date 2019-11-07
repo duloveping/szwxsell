@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <title>员工管理</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
     <meta content="webkit" name="renderer"/>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
@@ -12,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/style/admin.css}" media="all"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/layer/theme/default/layer.css}" media="all"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/layuiadmin/layui/css/modules/layer/default/layer.css}" media="all"/>
 </head>
 <body>
 <div class="layui-fluid">
@@ -24,22 +23,28 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="fullName" class="layui-input">
+                            <input type="text" name="fullname" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">帐号：</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userName" class="layui-input">
+                            <input type="text" name="username" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">状态：</label>
+                        <label class="layui-form-label">昵称：</label>
                         <div class="layui-input-inline">
-                            <select name="showState">
+                            <input type="text" name="nickname" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">锁定状态：</label>
+                        <div class="layui-input-inline">
+                            <select name="lockState">
                                 <option value="">全部</option>
-                                <option value="true">显示</option>
-                                <option value="false">隐藏</option>
+                                <option value="1">解锁</option>
+                                <option value="2">锁定</option>
                             </select>
                         </div>
                     </div>
@@ -55,7 +60,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">用户管理列表</div>
+                <div class="layui-card-header">员工管理列表</div>
                 <div class="layui-card-body">
                     <table class="layui-hide" id="data-table-list" lay-filter="dataTableList"></table>
                 </div>

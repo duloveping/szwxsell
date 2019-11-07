@@ -1,3 +1,14 @@
+function Employee() {};
+
+Employee.prototype = {
+    id: "",
+    fullname: "",
+    username: "",
+    nickname: "",
+    password: "",
+    lockState: ACCOUNT_LOCK_STATE_DISABLED
+};
+
 function Member() {};
 
 Member.prototype = {
