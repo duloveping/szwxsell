@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.szwx.sell.dao.mall.product.LoanTypeDao">
+    <insert id="insert" parameterType="cn.net.szwx.sell.entity.mall.product.LoanType"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into loan_type (creator_id, create_time, editor_id, edit_time, status, flag,
+        code, name, show_state, type_id, serial_number)
+        values (#{creatorId}, #{createTime}, #{editorId}, #{editTime}, #{status}, #{flag},
+        #{code}, #{name}, #{showState}, #{typeId}, #{serialNumber})
+    </insert>
+
+    <update id="update" parameterType="cn.net.szwx.sell.entity.mall.product.LoanType">
+        update loan_type set editor_id = #{editorId}, edit_time = #{editTime},
+        code = #{code}, name = #{name}, show_state = #{showState}, type_id = #{typeId}, serial_number = #{serialNumber}
+        where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update loan_type set status = false, flag = false where id = #{id}
+    </update>
+
+    <sql id="columns">
+        id, code, name, show_state, type_id, serial_number
+    </sql>
+
+    <select id="list" resultType="cn.net.szwx.sell.entity.mall.product.LoanType"
+            parameterType="cn.net.szwx.sell.entity.mall.product.LoanTypeSO">
+        select <include refid="columns"/>
+        from loan_type
+        where status = true and flag = true
+        <if test="null != typeId"> and type_id = #{typeId} </if>
+        <if test="null != showState"> and show_state = #{showState} </if>
+        <if test="null != code and '' != code"> and code = #{username} </if>
+        <if test="null != name and '' != name">
+            <bind name="nameLike" value="'%' + name + '%'" />
+            and name like #{nameLike}
+        </if>
+        <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+        order by type_id asc, serial_number asc, id desc
+    </select>
+
+    <select id="getById" resultType="cn.net.szwx.sell.entity.mall.product.LoanType">
+        select <include refid="columns"/>
+        from loan_type where status = true and flag = true and id = #{id}
+    </select>
+    
+    <select id="findRecursive" resultType="cn.net.szwx.sell.entity.mall.product.LoanType"
+            parameterType="cn.net.szwx.sell.entity.mall.product.LoanTypeSO">
+        with recursive t (id, code, name, show_state, type_id, serial_number) as (
+        select id, code, name, show_state, type_id, serial_number from loan_type
+        where flag = true and status = true
+        <if test="null != typeId">
+            <choose>
+                <when test="0 == typeId"> and type_id is null </when>
+                <otherwise> and type_id = #{typeId} </otherwise>
+            </choose>
+        </if>
+        <if test="null != showState"> and show_state = #{showState} </if>
+        <if test="null != code and '' != code"> and code = #{username} </if>
+        <if test="null != name and '' != name">
+            <bind name="nameLike" value="'%' + name + '%'" />
+            and name like #{nameLike}
+        </if>
+        <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+        union all
+        select t1.id, t1.code, t1.name, t1.show_state, t1.type_id, t1.serial_number
+        from loan_type t1 join t on t1.type_id = t.id
+        where t1.flag = true and t1.status = true
+        ) select id, code, name, show_state, type_id, serial_number from t
+    </select>
+</mapper>

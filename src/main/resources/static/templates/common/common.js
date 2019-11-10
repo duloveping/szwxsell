@@ -35,3 +35,16 @@ Member.prototype = {
     threeMemberId: "",
     threeMemberFullName: ""
 };
+
+function LoanType() {};
+
+LoanType.prototype = {
+    id: "",
+    code: "",
+    name: "",
+    showState: false,
+    typeId: "",
+    typeCode: "",
+    typeName: "",
+    serialNumber: 0
+};

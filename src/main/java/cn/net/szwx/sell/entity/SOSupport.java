@@ -26,6 +26,7 @@ public class SOSupport  extends PageInfo implements Serializable {
     private Boolean status;
     /** 标记 */
     private Boolean flag;
+    private Integer serialNumber;
     private Long exceptId;
 
     public SOSupport() {
@@ -85,6 +86,14 @@ public class SOSupport  extends PageInfo implements Serializable {
 
     public void setFlag(Boolean flag) {
         this.flag = flag;
+    }
+
+    public Integer getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(Integer serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public Long getExceptId() {

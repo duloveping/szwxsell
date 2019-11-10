@@ -40,6 +40,7 @@
             and nickname like #{nicknameLike}
         </if>
         <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+        order by id desc
     </select>
 
     <select id="getById" resultType="cn.net.szwx.sell.entity.system.user.Employee">
