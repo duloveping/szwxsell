@@ -1,9 +1,5 @@
 package cn.net.szwx.sell.entity;
 
-import cn.net.szwx.sell.common.Constants;
-import cn.net.szwx.sell.entity.system.user.Employee;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -33,6 +29,7 @@ public class EntitySupport implements Serializable {
     private Boolean status;
     /** 标记 */
     private Boolean flag;
+    private Integer serialNumber;
 
     public EntitySupport() {
     }
@@ -41,13 +38,13 @@ public class EntitySupport implements Serializable {
      * 插入之前执行方法，子类实现
      */
     public void preInsert() {
-        Subject subject = SecurityUtils.getSubject();
-        Object object = subject.getSession().getAttribute(Constants.DEFAULT_LOGIN_EMPLOYEE);
-        if (null != object) {
-            Employee employee = (Employee) object;
-            this.creatorId = employee.getId();
-            this.editorId = employee.getId();
-        }
+//        Subject subject = SecurityUtils.getSubject();
+//        Object object = subject.getSession().getAttribute(Constants.DEFAULT_LOGIN_EMPLOYEE);
+//        if (null != object) {
+//            Employee employee = (Employee) object;
+//            this.creatorId = employee.getId();
+//            this.editorId = employee.getId();
+//        }
 
         this.createTime = new Date();
         this.editTime = this.createTime;
@@ -59,12 +56,12 @@ public class EntitySupport implements Serializable {
      * 更新之前执行方法，子类实现
      */
     public void preUpdate() {
-        Subject subject = SecurityUtils.getSubject();
-        Object object = subject.getSession().getAttribute(Constants.DEFAULT_LOGIN_EMPLOYEE);
-        if (null != object) {
-            Employee employee = (Employee) object;
-            this.editorId = employee.getId();
-        }
+//        Subject subject = SecurityUtils.getSubject();
+//        Object object = subject.getSession().getAttribute(Constants.DEFAULT_LOGIN_EMPLOYEE);
+//        if (null != object) {
+//            Employee employee = (Employee) object;
+//            this.editorId = employee.getId();
+//        }
         this.editTime = new Date();
     }
 
@@ -122,5 +119,13 @@ public class EntitySupport implements Serializable {
 
     public void setFlag(Boolean flag) {
         this.flag = flag;
+    }
+
+    public Integer getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(Integer serialNumber) {
+        this.serialNumber = serialNumber;
     }
 }
