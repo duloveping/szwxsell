@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.szwx.sell.dao.mall.product.LoanLabelDao">
+    <insert id="insert" parameterType="cn.net.szwx.sell.entity.mall.product.LoanLabel"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into loan_type (creator_id, create_time, editor_id, edit_time, status, flag,
+        code, name, show_state, serial_number)
+        values (#{creatorId}, #{createTime}, #{editorId}, #{editTime}, #{status}, #{flag},
+        #{code}, #{name}, #{showState}, #{serialNumber})
+    </insert>
+
+    <update id="update" parameterType="cn.net.szwx.sell.entity.mall.product.LoanLabel">
+        update loan_type set editor_id = #{editorId}, edit_time = #{editTime},
+        code = #{code}, name = #{name}, show_state = #{showState}, serial_number = #{serialNumber}
+        where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update loan_type set status = false, flag = false where id = #{id}
+    </update>
+
+    <sql id="columns">
+        id, code, name, show_state, serial_number
+    </sql>
+
+    <select id="list" resultType="cn.net.szwx.sell.entity.mall.product.LoanLabel"
+            parameterType="cn.net.szwx.sell.entity.mall.product.LoanLabelSO">
+        select <include refid="columns"/>
+        from loan_type
+        where status = true and flag = true
+        <if test="null != showState"> and show_state = #{showState} </if>
+        <if test="null != code and '' != code"> and code = #{username} </if>
+        <if test="null != name and '' != name">
+            <bind name="nameLike" value="'%' + name + '%'" />
+            and name like #{nameLike}
+        </if>
+        <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+        order serial_number asc, id desc
+    </select>
+
+    <select id="getById" resultType="cn.net.szwx.sell.entity.mall.product.LoanLabel">
+        select <include refid="columns"/>
+        from loan_type where status = true and flag = true and id = #{id}
+    </select>
+</mapper>
