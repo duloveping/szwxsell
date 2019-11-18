@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.szwx.sell.dao.mall.product.LoanProductDao">
+    <insert id="insert" parameterType="cn.net.szwx.sell.entity.mall.product.LoanProduct"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into loan_product (creator_id, create_time, editor_id, edit_time, status, flag,
+        code, name, image, show_state, sell_state, new_state, hot_state, sale_state, serial_number,
+        one_bonus, two_bonus, three_bonus, product_feature, apply_condition, apply_flow, apply_data, product_award)
+        values (#{creatorId}, #{createTime}, #{editorId}, #{editTime}, #{status}, #{flag},
+        #{code},#{name},#{image},#{showState},#{sellState},#{newState},#{hotState},#{saleState},#{serialNumber},
+        #{oneBonus},#{twoBonus},#{threeBonus},#{productFeature},#{applyCondition},#{applyFlow},#{applyData},#{productAward})
+    </insert>
+
+    <update id="update" parameterType="cn.net.szwx.sell.entity.mall.product.LoanProduct">
+        update loan_product set editor_id = #{editorId}, edit_time = #{editTime},
+        code = #{code},  name = #{name},  image = #{image},  show_state = #{showState},  sell_state = #{sellState},
+        new_state = #{newState},  hot_state = #{hotState},  sale_state = #{saleState},  serial_number = #{serialNumber},
+        one_bonus = #{oneBonus},  two_bonus = #{twoBonus},  three_bonus = #{threeBonus},  product_feature = #{productFeature},
+        apply_condition = #{applyCondition},  apply_flow = #{applyFlow},  apply_data = #{applyData},  product_award = #{productAward}
+        where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update loan_product set status = false, flag = false where id = #{id}
+    </update>
+
+    <sql id="columns">
+        id, code, name, image, show_state, sell_state, new_state, hot_state, sale_state, serial_number,
+        one_bonus, two_bonus, three_bonus, product_feature, apply_condition, apply_flow, apply_data, product_award
+    </sql>
+
+    <select id="list" resultType="cn.net.szwx.sell.entity.mall.product.LoanProduct"
+            parameterType="cn.net.szwx.sell.entity.mall.product.LoanProductSO">
+        select <include refid="columns"/>
+        from loan_product
+        where status = true and flag = true
+        <if test="null != showState"> and show_state = #{showState} </if>
+        <if test="null != sellState"> and sell_state = #{sellState} </if>
+        <if test="null != newState"> and new_state = #{newState} </if>
+        <if test="null != hotState"> and hot_state = #{hotState} </if>
+        <if test="null != saleState"> and sale_state = #{saleState} </if>
+        <if test="null != code and '' != code"> and code = #{code} </if>
+        <if test="null != name and '' != name">
+            <bind name="nameLike" value="'%' + name + '%'" />
+            and name like #{nameLike}
+        </if>
+        <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
+        order by serial_number asc, id desc
+    </select>
+
+    <select id="getById" resultType="cn.net.szwx.sell.entity.mall.product.LoanProduct">
+        select <include refid="columns"/>
+        from loan_product where status = true and flag = true and id = #{id}
+    </select>
+</mapper>
