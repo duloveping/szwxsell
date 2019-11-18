@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>贷款标签添加编辑</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>贷款银行详情</title>
     <meta charset="utf-8"/>
     <meta content="webkit" name="renderer"/>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
@@ -18,47 +17,39 @@
 <div class="layui-fluid">
     <form th:object="${so}" class="layui-form" method="post" lay-filter="component-form-element">
         <div class="layui-card">
-            <div class="layui-card-header">贷款标签添加编辑</div>
+            <div class="layui-card-header">贷款银行详情</div>
             <div class="layui-card-body">
                 <div class="layui-row layui-form-item">
-                    <div class="layui-col-xs6 layui-col-md12">
-                        <label class="layui-form-label"><span style="color:red;">*</span>标签编码：</label>
+                    <div class="layui-col-xs12 layui-col-md12">
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行编码：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="code" th:value="${so.code}" lay-verify="required" placeholder="请输入标签编码" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="code" th:value="${so.code}" lay-verify="required" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                 </div>
                 <div class="layui-row layui-form-item">
-                    <div class="layui-col-xs6 layui-col-md12">
-                        <label class="layui-form-label"><span style="color:red;">*</span>标签名称：</label>
+                    <div class="layui-col-xs12 layui-col-md12">
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行账号：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" th:value="${so.name}" lay-verify="required" placeholder="请输入标签名称" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="name" th:value="${so.name}" lay-verify="required" class="layui-input" disabled="disabled">
                         </div>
                     </div>
                 </div>
                 <div class="layui-row layui-form-item">
-                    <div class="layui-col-xs6 layui-col-md12">
+                    <div class="layui-col-xs12 layui-col-md12">
                         <label class="layui-form-label"><span style="color:red;">*</span>显示状态：</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="showState" value="true" title="显示" th:checked="${so.showState eq true}">
-                            <input type="radio" name="showState" value="false" title="隐藏" th:checked="${so.showState eq false}">
+                            <input type="radio" name="showState" value="true" title="显示" th:checked="${so.showState eq true}" disabled="disabled">
+                            <input type="radio" name="showState" value="false" title="隐藏" th:checked="${so.showState eq false}" disabled="disabled">
                         </div>
                     </div>
                 </div>
                 <div class="layui-row layui-form-item">
                     <div class="layui-col-xs6 layui-col-md12">
-                        <label class="layui-form-label">排序：</label>
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行图片：</label>
                         <div class="layui-input-block">
-                            <input type="number" id="serialNumber" name="serialNumber" th:value="${so.serialNumber}" placeholder="排序验序号" autocomplete="off" class="layui-input" min="0" max="9999" maxlength="4">
+                            <img id="previewImage" th:src="${so.image}" th:alt="${so.name + '的图片'}" class="layui-upload-img">
                         </div>
-                    </div>
-                </div>
-                <div class="layui-row layui-form-item">
-                    <div class="layui-input-block">
-                        <input id="id" name="id" type="hidden" th:value="${so.id}">
-                        <button id="saveButton" type="submit" class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>
-                        <button id="resetButton" type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        <button id="backButton" type="button" class="layui-btn layui-btn-normal">返回</button>
                     </div>
                 </div>
             </div>
@@ -68,6 +59,6 @@
 <script language="javascript" type="text/javascript" th:src="@{/static/layuiadmin/layui/layui.js}"></script>
 <script language="javascript" type="text/javascript" th:src="@{/static/templates/common/constants.js}"></script>
 <script language="javascript" type="text/javascript" th:src="@{/static/templates/common/common.js}"></script>
-<script language="javascript" type="text/javascript" th:src="@{/static/templates/manage/mall/product/loan-label/label-edit.js}"></script>
+<script language="javascript" type="text/javascript" th:src="@{/static/templates/manage/mall/product/loan-bank/bank-view.js}"></script>
 </body>
 </html>

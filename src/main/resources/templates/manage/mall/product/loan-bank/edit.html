@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <title>贷款标签添加编辑</title>
+    <title>贷款银行添加编辑</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
     <meta content="webkit" name="renderer"/>
@@ -18,21 +18,40 @@
 <div class="layui-fluid">
     <form th:object="${so}" class="layui-form" method="post" lay-filter="component-form-element">
         <div class="layui-card">
-            <div class="layui-card-header">贷款标签添加编辑</div>
+            <div class="layui-card-header">贷款银行添加编辑</div>
             <div class="layui-card-body">
                 <div class="layui-row layui-form-item">
                     <div class="layui-col-xs6 layui-col-md12">
-                        <label class="layui-form-label"><span style="color:red;">*</span>标签编码：</label>
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行编码：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="code" th:value="${so.code}" lay-verify="required" placeholder="请输入标签编码" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="code" th:value="${so.code}" lay-verify="required" placeholder="请输入银行编码" autocomplete="off" class="layui-input" maxlength="50">
                         </div>
                     </div>
                 </div>
                 <div class="layui-row layui-form-item">
                     <div class="layui-col-xs6 layui-col-md12">
-                        <label class="layui-form-label"><span style="color:red;">*</span>标签名称：</label>
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行名称：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="name" th:value="${so.name}" lay-verify="required" placeholder="请输入标签名称" autocomplete="off" class="layui-input" maxlength="50">
+                            <input type="text" name="name" th:value="${so.name}" lay-verify="required" placeholder="请输入银行名称" autocomplete="off" class="layui-input" maxlength="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row layui-form-item">
+                    <div class="layui-col-xs6 layui-col-md12">
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行图片：</label>
+                        <div class="layui-input-block">
+                            <input id="image" name="image" type="hidden" th:value="${so.image}">
+                            <img id="previewImage" th:src="${so.image}" th:alt="${so.name + '的图片'}" class="layui-upload-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row layui-form-item">
+                    <div class="layui-col-xs6 layui-col-md12">
+                        <label class="layui-form-label"><span style="color:red;">*</span>银行名称：</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="upload-image-button">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -68,6 +87,6 @@
 <script language="javascript" type="text/javascript" th:src="@{/static/layuiadmin/layui/layui.js}"></script>
 <script language="javascript" type="text/javascript" th:src="@{/static/templates/common/constants.js}"></script>
 <script language="javascript" type="text/javascript" th:src="@{/static/templates/common/common.js}"></script>
-<script language="javascript" type="text/javascript" th:src="@{/static/templates/manage/mall/product/loan-label/label-edit.js}"></script>
+<script language="javascript" type="text/javascript" th:src="@{/static/templates/manage/mall/product/loan-bank/bank-edit.js}"></script>
 </body>
 </html>
