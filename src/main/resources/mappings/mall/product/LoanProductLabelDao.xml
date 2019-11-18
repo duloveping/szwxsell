@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.net.szwx.sell.dao.mall.product.LoanProductLabelDao">
+    <insert id="insert" parameterType="cn.net.szwx.sell.entity.mall.product.LoanProductLabel"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into loan_product_label (creator_id, create_time, editor_id, edit_time, status, flag,
+        label_id, product_id)
+        values (#{creatorId}, #{createTime}, #{editorId}, #{editTime}, #{status}, #{flag},
+        #{labelId}, #{productId})
+    </insert>
+
+    <update id="update" parameterType="cn.net.szwx.sell.entity.mall.product.LoanProductLabel">
+        update loan_product_label set editor_id = #{editorId}, edit_time = #{editTime},
+        label_id = #{labelId}, product_id = #{productId} where id = #{id}
+    </update>
+
+    <update id="deleteById">
+        update loan_product_label set status = false, flag = false where id = #{id}
+    </update>
+
+    <sql id="columns">
+        id, label_id, product_id
+    </sql>
+
+    <select id="list" resultType="cn.net.szwx.sell.entity.mall.product.LoanProductLabel"
+            parameterType="cn.net.szwx.sell.entity.mall.product.LoanProductLabelSO">
+        select <include refid="columns"/>
+        from loan_product_label
+        where status = true and flag = true
+        <if test="null != labelId"> and label_id = #{labelId} </if>
+        <if test="null != productId"> and product_id = #{productId} </if>
+    </select>
+
+    <select id="getById" resultType="cn.net.szwx.sell.entity.mall.product.LoanProductLabel">
+        select <include refid="columns"/>
+        from loan_product_label where status = true and flag = true and id = #{id}
+    </select>
+</mapper>
