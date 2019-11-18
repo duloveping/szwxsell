@@ -29,13 +29,13 @@
         from loan_type
         where status = true and flag = true
         <if test="null != showState"> and show_state = #{showState} </if>
-        <if test="null != code and '' != code"> and code = #{username} </if>
+        <if test="null != code and '' != code"> and code = #{code} </if>
         <if test="null != name and '' != name">
             <bind name="nameLike" value="'%' + name + '%'" />
             and name like #{nameLike}
         </if>
         <if test="null != exceptId"><![CDATA[ and ((id <= #{exceptId - 1}) or (id >= #{exceptId + 1})) ]]></if>
-        order serial_number asc, id desc
+        order by serial_number asc, id desc
     </select>
 
     <select id="getById" resultType="cn.net.szwx.sell.entity.mall.product.LoanLabel">

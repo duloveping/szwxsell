@@ -48,3 +48,13 @@ LoanType.prototype = {
     typeName: "",
     serialNumber: 0
 };
+
+function LoanLabel() {};
+
+LoanLabel.prototype = {
+    id: "",
+    code: "",
+    name: "",
+    showState: false,
+    serialNumber: 0
+};
