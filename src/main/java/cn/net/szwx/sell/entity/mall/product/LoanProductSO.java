@@ -1,6 +1,9 @@
 package cn.net.szwx.sell.entity.mall.product;
 
 import cn.net.szwx.sell.entity.SOSupport;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 
 public class LoanProductSO extends SOSupport {
     /** 编码 */
@@ -35,6 +38,18 @@ public class LoanProductSO extends SOSupport {
     private String applyData;
     /** 奖励措施 */
     private String productAward;
+    @JsonIgnore
+    private List<LoanType> loanTypeList;
+    @JsonIgnore
+    private List<LoanBank> loanBankList;
+    @JsonIgnore
+    private List<LoanLabel> loanLabelList;
+    @JsonIgnore
+    private List<LoanProductBank> loanProductBankList;
+    @JsonIgnore
+    private List<LoanProductLabel> loanProductLabelList;
+    @JsonIgnore
+    private List<LoanProductType> loanProductTypeList;
 
     public LoanProductSO() {
     }
@@ -165,5 +180,53 @@ public class LoanProductSO extends SOSupport {
 
     public void setProductAward(String productAward) {
         this.productAward = productAward;
+    }
+
+    public List<LoanType> getLoanTypeList() {
+        return loanTypeList;
+    }
+
+    public void setLoanTypeList(List<LoanType> loanTypeList) {
+        this.loanTypeList = loanTypeList;
+    }
+
+    public List<LoanBank> getLoanBankList() {
+        return loanBankList;
+    }
+
+    public void setLoanBankList(List<LoanBank> loanBankList) {
+        this.loanBankList = loanBankList;
+    }
+
+    public List<LoanLabel> getLoanLabelList() {
+        return loanLabelList;
+    }
+
+    public void setLoanLabelList(List<LoanLabel> loanLabelList) {
+        this.loanLabelList = loanLabelList;
+    }
+
+    public List<LoanProductBank> getLoanProductBankList() {
+        return loanProductBankList;
+    }
+
+    public void setLoanProductBankList(List<LoanProductBank> loanProductBankList) {
+        this.loanProductBankList = loanProductBankList;
+    }
+
+    public List<LoanProductLabel> getLoanProductLabelList() {
+        return loanProductLabelList;
+    }
+
+    public void setLoanProductLabelList(List<LoanProductLabel> loanProductLabelList) {
+        this.loanProductLabelList = loanProductLabelList;
+    }
+
+    public List<LoanProductType> getLoanProductTypeList() {
+        return loanProductTypeList;
+    }
+
+    public void setLoanProductTypeList(List<LoanProductType> loanProductTypeList) {
+        this.loanProductTypeList = loanProductTypeList;
     }
 }

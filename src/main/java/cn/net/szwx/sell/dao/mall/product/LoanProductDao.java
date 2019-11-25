@@ -2,9 +2,11 @@ package cn.net.szwx.sell.dao.mall.product;
 
 import cn.net.szwx.sell.entity.mall.product.LoanProduct;
 import cn.net.szwx.sell.entity.mall.product.LoanProductSO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface LoanProductDao {
     /**
      * 插入

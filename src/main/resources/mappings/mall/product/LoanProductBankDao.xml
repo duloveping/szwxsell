@@ -22,6 +22,18 @@
         id, bank_id, product_id
     </sql>
 
+    <resultMap id="resultMap" type="cn.net.szwx.sell.entity.mall.product.LoanProductBank">
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="bank_id" jdbcType="VARCHAR" property="bankId" />
+        <result column="product_id" jdbcType="VARCHAR" property="productId" />
+        <association property="loanbank" column="{id=bank_id}"
+                     select="cn.net.szwx.sell.dao.mall.product.LoanBankDao.getById"
+                     javaType="cn.net.szwx.sell.entity.mall.product.LoanBank"/>
+        <association property="loanProduct" column="{id=product_id}"
+                     select="cn.net.szwx.sell.dao.mall.product.LoanProductDao.getById"
+                     javaType="cn.net.szwx.sell.entity.mall.product.LoanProduct"/>
+    </resultMap>
+
     <select id="list" resultType="cn.net.szwx.sell.entity.mall.product.LoanProductBank"
             parameterType="cn.net.szwx.sell.entity.mall.product.LoanProductBankSO">
         select <include refid="columns"/>
