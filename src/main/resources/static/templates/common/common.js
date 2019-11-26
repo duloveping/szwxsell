@@ -69,3 +69,40 @@ LoanLabel.prototype = {
     image: "",
     serialNumber: 0
 };
+
+function LoanProductBank() {};
+
+LoanProductBank.prototype = {
+    id: "",
+    bankId: "",
+    productId: ""
+};
+
+function LoanProduct() {};
+
+LoanProduct.prototype = {
+    id: "",
+    code: "",
+    name: "",
+    image: "",
+    showState: false,
+    sellState: false,
+    newState: false,
+    hotState: false,
+    saleState: false,
+    oneBonus: 0.0,
+    twoBonus: 0.0,
+    threeBonus: 0.0,
+    productFeature: "",
+    applyCondition: "",
+    applyFlow: "",
+    applyData: "",
+    productAward: "",
+    loanTypeList: new Array(),
+    loanBankList: new Array(),
+    loanLabelList: new Array(),
+    loanProductBankList: new Array(),
+    loanProductLabelList: new Array(),
+    loanProductTypeList: new Array(),
+    serialNumber: 0
+};

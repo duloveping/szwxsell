@@ -3,9 +3,12 @@ package cn.net.szwx.sell.controller.manage.mall.product;
 import cn.net.szwx.sell.controller.UploadController;
 import cn.net.szwx.sell.entity.mall.product.LoanBank;
 import cn.net.szwx.sell.entity.mall.product.LoanBankSO;
+import cn.net.szwx.sell.entity.mall.product.LoanProduct;
 import cn.net.szwx.sell.service.mall.product.LoanBankService;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/manage/mall/product/loan-bank")
@@ -85,5 +90,25 @@ public class LoanBankController extends UploadController {
     public JSONObject delete(@RequestParam Long id){
         loanBankService.deleteById(id);
         return resultSuccess();
+    }
+
+    @ResponseBody
+    @RequestMapping("select-list")
+    public JSONObject selectList(){
+        LoanBankSO bankSO = new LoanBankSO();
+        bankSO.setShowState(true);
+        List<LoanBank> bankList = loanBankService.list(bankSO);
+        JSONArray array = new JSONArray();
+        if (CollectionUtils.isNotEmpty(bankList)) {
+            for (LoanBank bank : bankList) {
+                JSONObject data = new JSONObject();
+                data.put("value", bank.getId());
+                data.put("name", bank.getName());
+                array.add(data);
+            }
+        }
+        JSONObject json = resultSuccess();
+        json.put("datas", array);
+        return json;
     }
 }

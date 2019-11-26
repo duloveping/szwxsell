@@ -42,4 +42,8 @@ public interface LoanProductLabelDao {
      * @return
      */
     int deleteById(Long id);
+
+    int deleteByProductId(Long productId);
+
+    int deleteByLabelId(Long labelId);
 }

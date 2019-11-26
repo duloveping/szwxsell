@@ -43,4 +43,8 @@ public interface LoanProductBankService {
      * @return
      */
     int deleteById(Long id);
+
+    void deleteByProductId(Long productId);
+
+    void deleteByBankId(Long bankId);
 }

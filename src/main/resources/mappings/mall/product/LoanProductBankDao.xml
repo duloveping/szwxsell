@@ -34,7 +34,7 @@
                      javaType="cn.net.szwx.sell.entity.mall.product.LoanProduct"/>
     </resultMap>
 
-    <select id="list" resultType="cn.net.szwx.sell.entity.mall.product.LoanProductBank"
+    <select id="list" resultMap="resultMap"
             parameterType="cn.net.szwx.sell.entity.mall.product.LoanProductBankSO">
         select <include refid="columns"/>
         from loan_product_bank
@@ -43,8 +43,16 @@
         <if test="null != productId"> and product_id = #{productId} </if>
     </select>
 
-    <select id="getById" resultType="cn.net.szwx.sell.entity.mall.product.LoanProductBank">
+    <select id="getById" resultMap="resultMap">
         select <include refid="columns"/>
         from loan_product_bank where status = true and flag = true and id = #{id}
+    </select>
+    
+    <select id="deleteByProductId">
+        delete from loan_product_bank where product_id = #{productId}
+    </select>
+
+    <select id="deleteByBankId">
+        delete from loan_product_bank where bank_id = #{bankId}
     </select>
 </mapper>

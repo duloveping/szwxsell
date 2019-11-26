@@ -53,4 +53,16 @@ public class LoanProductLabelServiceImpl implements LoanProductLabelService {
     public int deleteById(Long id) {
         return loanProductLabelDao.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public int deleteByProductId(Long productId) {
+        return loanProductLabelDao.deleteByProductId(productId);
+    }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public int deleteByLabelId(Long labelId) {
+        return loanProductLabelDao.deleteByLabelId(labelId);
+    }
 }

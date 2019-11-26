@@ -43,4 +43,8 @@ public interface LoanProductTypeService {
      * @return
      */
     int deleteById(Long id);
+
+    int deleteByProductId(Long productId);
+
+    int deleteByTypeIdId(Long typeId);
 }

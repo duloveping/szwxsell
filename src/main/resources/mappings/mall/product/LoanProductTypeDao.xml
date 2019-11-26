@@ -35,4 +35,12 @@
         select <include refid="columns"/>
         from loan_product_type where status = true and flag = true and id = #{id}
     </select>
+    
+    <delete id="deleteByProductId">
+        delete from loan_product_type where product_id = #{productId}
+    </delete>
+
+    <delete id="deleteByTypeIdId">
+        delete from loan_product_type where type_id = #{typeId}
+    </delete>
 </mapper>

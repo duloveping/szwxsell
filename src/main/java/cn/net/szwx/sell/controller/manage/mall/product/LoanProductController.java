@@ -1,14 +1,11 @@
 package cn.net.szwx.sell.controller.manage.mall.product;
 
 import cn.net.szwx.sell.controller.UploadController;
-import cn.net.szwx.sell.entity.mall.product.LoanBank;
-import cn.net.szwx.sell.entity.mall.product.LoanBankSO;
-import cn.net.szwx.sell.entity.mall.product.LoanProduct;
-import cn.net.szwx.sell.entity.mall.product.LoanProductSO;
-import cn.net.szwx.sell.service.mall.product.LoanBankService;
-import cn.net.szwx.sell.service.mall.product.LoanProductService;
+import cn.net.szwx.sell.entity.mall.product.*;
+import cn.net.szwx.sell.service.mall.product.*;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +23,12 @@ public class LoanProductController extends UploadController {
     private LoanProductService loanProductService;
     @Autowired
     private LoanBankService loanBankService;
+    @Autowired
+    private LoanProductBankService loanProductBankService;
+    @Autowired
+    private LoanProductTypeService loanProductTypeService;
+    @Autowired
+    private LoanProductLabelService loanProductLabelService;
 
     @RequestMapping("index")
     public ModelAndView index() {
@@ -42,12 +45,32 @@ public class LoanProductController extends UploadController {
         json.put("pages", pageInfo.getPages());
         return json;
     }
+
     @RequestMapping("edit")
     public ModelAndView edit(@RequestParam(required = false) Long id) {
         LoanProduct loanProduct = new LoanProduct();
         ModelAndView mv = new ModelAndView("manage/mall/product/loan-product/edit");
         if (null != id && id > 0) {
             loanProduct = loanProductService.getById(id);
+            if (null != loanProduct) {
+                LoanProductBankSO bankSO = new LoanProductBankSO();
+                bankSO.setProductId(loanProduct.getId());
+
+                List<LoanProductBank> productBankList = loanProductBankService.list(bankSO);
+                mv.getModel().put("productBankList", productBankList);
+
+                LoanProductTypeSO typeSO = new LoanProductTypeSO();
+                typeSO.setProductId(loanProduct.getId());
+
+                List<LoanProductType> productTypeList = loanProductTypeService.list(typeSO);
+                mv.getModel().put("productTypeList", productTypeList);
+
+                LoanProductLabelSO labelSO = new LoanProductLabelSO();
+                labelSO.setProductId(loanProduct.getId());
+
+                List<LoanProductLabel> productLabelList = loanProductLabelService.list(labelSO);
+                mv.getModel().put("productLabelList", productLabelList);
+            }
         } else {
             loanProduct.setShowState(Boolean.FALSE);
             loanProduct.setSellState(Boolean.FALSE);
@@ -83,6 +106,7 @@ public class LoanProductController extends UploadController {
         loanProduct.setSellState(so.getSellState());
         loanProduct.setNewState(so.getNewState());
         loanProduct.setSaleState(so.getSaleState());
+        loanProduct.setHotState(so.getHotState());
         loanProduct.setOneBonus(so.getOneBonus());
         loanProduct.setTwoBonus(so.getTwoBonus());
         loanProduct.setThreeBonus(so.getThreeBonus());
@@ -93,16 +117,34 @@ public class LoanProductController extends UploadController {
         loanProduct.setProductAward(StringUtils.trimToNull(so.getProductAward()));
         loanProduct.setSerialNumber(so.getSerialNumber());
         if (null != so.getId() && so.getId() > 0) {
+            loanProductBankService.deleteByProductId(loanProduct.getId());
+            loanProductLabelService.deleteByProductId(loanProduct.getId());
+            loanProductTypeService.deleteByProductId(loanProduct.getId());
             loanProductService.update(loanProduct);
         } else {
             loanProductService.insert(loanProduct);
+        }
+
+        if (CollectionUtils.isNotEmpty(loanProduct.getLoanProductBankList())) {
+            for (LoanProductBank bank : loanProduct.getLoanProductBankList()) {
+                loanProductBankService.insert(bank);
+            }
+        }
+        if (CollectionUtils.isNotEmpty(loanProduct.getLoanProductLabelList())) {
+            for (LoanProductLabel label : loanProduct.getLoanProductLabelList()) {
+                loanProductLabelService.insert(label);
+            }
+        }
+        if (CollectionUtils.isNotEmpty(loanProduct.getLoanProductTypeList())) {
+            for (LoanProductType type : loanProduct.getLoanProductTypeList()) {
+                loanProductTypeService.insert(type);
+            }
         }
 
         LoanBankSO bankSO = new LoanBankSO();
         bankSO.setShowState(Boolean.TRUE);
         List<LoanBank> bankList =loanBankService.list(bankSO);
         loanProduct.setLoanBankList(bankList);
-
 
         JSONObject result = resultSuccess();;
         result.put("data", loanProduct);

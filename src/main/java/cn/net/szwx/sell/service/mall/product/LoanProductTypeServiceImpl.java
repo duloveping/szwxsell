@@ -53,4 +53,16 @@ public class LoanProductTypeServiceImpl implements LoanProductTypeService {
     public int deleteById(Long id) {
         return loanProductTypeDao.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public int deleteByProductId(Long productId) {
+        return loanProductTypeDao.deleteByProductId(productId);
+    }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public int deleteByTypeIdId(Long typeId) {
+        return loanProductTypeDao.deleteByTypeIdId(typeId);
+    }
 }

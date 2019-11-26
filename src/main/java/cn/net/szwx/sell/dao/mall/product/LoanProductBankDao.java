@@ -42,4 +42,8 @@ public interface LoanProductBankDao {
      * @return
      */
     int deleteById(Long id);
+
+    void deleteByProductId(Long productId);
+
+    void deleteByBankId(Long bankId);
 }

@@ -23,6 +23,22 @@ public class LoanProductBank extends EntitySupport {
         this.productId = productId;
     }
 
+    public Long getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(Long bankId) {
+        this.bankId = bankId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     public LoanBank getLoanbank() {
         return loanbank;
     }
