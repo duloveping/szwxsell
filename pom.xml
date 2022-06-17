@@ -21,7 +21,7 @@
 		<mybatis-spring-boot-starter.version>2.0.1</mybatis-spring-boot-starter.version>
 		<pagehelper-spring-boot-starter.version>1.2.12</pagehelper-spring-boot-starter.version>
 		<shiro-spring-boot-web-starter.version>1.4.1</shiro-spring-boot-web-starter.version>
-		<fastjson.version>1.2.58</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-codec.version>1.13</commons-codec.version>
 		<UserAgentUtils.version>1.21</UserAgentUtils.version>
